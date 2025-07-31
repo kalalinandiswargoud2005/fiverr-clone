@@ -34,32 +34,30 @@ const ChatPage = () => {
     
     // Join the socket room after fetching data
     socketRef.current.emit('joinRoom', orderId);
-
   }, [orderId]);
-
 
   useEffect(() => {
     // Connect the socket when the component mounts
-    socketRef.current = io('http://localhost:8800');
+    socketRef.current = io(process.env.REACT_APP_API_URL || 'http://localhost:8800');
     
     const setup = async () => {
-        try {
-            setLoading(true);
-            const { data: { user } } = await supabase.auth.getUser();
-            if (!user) throw new Error("User not found");
-            setCurrentUser(user);
-            await fetchInitialData(user);
-        } catch(err) {
-            console.error("Error setting up chat:", err);
-        } finally {
-            setLoading(false);
-        }
+      try {
+        setLoading(true);
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) throw new Error("User not found");
+        setCurrentUser(user);
+        await fetchInitialData(user);
+      } catch(err) {
+        console.error("Error setting up chat:", err);
+      } finally {
+        setLoading(false);
+      }
     }
     setup();
 
     // Listen for incoming messages
     socketRef.current.on('receiveMessage', (incomingMessage) => {
-        setMessages((prevMessages) => [...prevMessages, incomingMessage]);
+      setMessages((prevMessages) => [...prevMessages, incomingMessage]);
     });
     
     // Cleanup function: disconnects when the user navigates away

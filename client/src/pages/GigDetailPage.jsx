@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import placeholderImage from '../assets/placeholder.png';
-import axios from 'axios'; // You may not need axios if not using Stripe
+import axios from 'axios';
 
 const StarRating = ({ rating }) => {
   return (
@@ -67,7 +67,6 @@ const GigDetailPage = () => {
     }
   }, [gigId]);
 
-  // --- FIXED: Restored the purchase logic ---
   const handlePurchase = async () => {
     setPurchasing(true);
     setError('');
@@ -79,7 +78,19 @@ const GigDetailPage = () => {
         return;
       }
 
-      // This logic directly creates an order (bypassing live payment for now)
+      // ⚡ Optional: Stripe Checkout Integration
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8800';
+
+      /*
+      const response = await axios.post(`${apiUrl}/api/create-checkout-session`, {
+        gigId: gig.id,
+        buyerId: user.id,
+      });
+      window.location.href = response.data.url;
+      return;
+      */
+
+      // 🚀 Default: Direct order creation without payment
       const { error: insertError } = await supabase.from('orders').insert({
         gig_id: gig.id,
         buyer_id: user.id,
@@ -91,7 +102,7 @@ const GigDetailPage = () => {
       if (insertError) throw insertError;
 
       alert('Order created successfully!');
-      navigate('/orders'); // Redirect to the orders page
+      navigate('/orders');
     } catch (err) {
       setError(err.message);
       console.error("Order creation error:", err);
@@ -107,27 +118,42 @@ const GigDetailPage = () => {
   return (
     <div className="container mx-auto px-6 py-8">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-        {/* Left Column: Gig Details */}
+        {/* Left Column */}
         <div className="lg:col-span-2">
           <h1 className="text-4xl font-bold text-gray-800 mb-4">{gig.title}</h1>
           <div className="flex items-center mb-6">
             <img src={gig.users?.profile_image_url || placeholderImage} alt={gig.users?.username} className="w-12 h-12 rounded-full mr-4 object-cover" />
             <span className="font-bold text-lg">{gig.users?.username || 'Seller'}</span>
           </div>
-          
-          {/* FIXED: Using the correct 'cover_image' property */}
-          <img src={gig.cover_image} alt={gig.title} className="w-full rounded-lg shadow-lg mb-8" />
 
+          <img src={gig.cover_image} alt={gig.title} className="w-full rounded-lg shadow-lg mb-8" />
           <h2 className="text-2xl font-bold mb-4">About This Gig</h2>
           <p className="text-gray-700 whitespace-pre-wrap mb-8">{gig.description}</p>
 
-          {/* Reviews Section */}
+          {/* Reviews */}
           <div className="border-t pt-8">
-            {/* ... reviews logic ... */}
+            {reviews.length > 0 ? (
+              reviews.map((review) => (
+                <div key={review.id} className="mb-6">
+                  <div className="flex items-center mb-2">
+                    <img
+                      src={review.reviewer?.profile_image_url || placeholderImage}
+                      alt={review.reviewer?.username}
+                      className="w-8 h-8 rounded-full mr-2 object-cover"
+                    />
+                    <span className="font-semibold">{review.reviewer?.username || 'User'}</span>
+                  </div>
+                  <StarRating rating={review.rating} />
+                  <p className="text-gray-600">{review.comment}</p>
+                </div>
+              ))
+            ) : (
+              <p className="text-gray-500">No reviews yet.</p>
+            )}
           </div>
         </div>
 
-        {/* Right Column: Purchase Box */}
+        {/* Right Column */}
         <div className="lg:col-span-1">
           <div className="border rounded-lg p-6 sticky top-24">
             <div className="flex justify-between items-baseline mb-4">
@@ -135,7 +161,11 @@ const GigDetailPage = () => {
               <span className="text-2xl font-bold">${gig.price}</span>
             </div>
             <p className="text-gray-600 mb-6"><b>{gig.delivery_time} Days Delivery</b></p>
-            <button onClick={handlePurchase} disabled={purchasing} className="w-full bg-fiverr-green text-white font-bold py-3 rounded hover:bg-green-700 transition-colors disabled:opacity-50">
+            <button
+              onClick={handlePurchase}
+              disabled={purchasing}
+              className="w-full bg-fiverr-green text-white font-bold py-3 rounded hover:bg-green-700 transition-colors disabled:opacity-50"
+            >
               {purchasing ? 'Processing...' : `Continue ($${gig.price})`}
             </button>
           </div>
