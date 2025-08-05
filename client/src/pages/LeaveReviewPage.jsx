@@ -80,9 +80,9 @@ const LeaveReviewPage = () => {
         </div>
         <div>
           <label htmlFor="comment" className="block text-lg font-medium text-gray-700">Your Comment</label>
-          <textarea id="comment" value={comment} onChange={(e) => setComment(e.target.value)} rows="5" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-fiverr-green focus:border-fiverr-green"></textarea>
+          <textarea id="comment" value={comment} onChange={(e) => setComment(e.target.value)} rows="5" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-skillora-green focus:border-skillora-green"></textarea>
         </div>
-        <button type="submit" disabled={loading} className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-fiverr-green hover:bg-green-700 disabled:opacity-50">
+        <button type="submit" disabled={loading} className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-skillora-green hover:bg-green-700 disabled:opacity-50">
           {loading ? 'Submitting...' : 'Submit Review'}
         </button>
       </form>

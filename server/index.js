@@ -1,4 +1,4 @@
-// fiverr-clone/server/index.js
+// fiver-clone/server/index.js
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
@@ -23,6 +23,42 @@ const io = new Server(server, {
 app.use(cors({ origin: process.env.CLIENT_URL }));
 app.use(express.json());
 
+app.post('/api/create-checkout-session', async (req, res) => {
+  try {
+    const { gigId } = req.body;
+
+    // 1. Fetch gig details from Supabase
+    const { data: gig, error } = await supabase
+      .from('gigs')
+      .select('title, price')
+      .eq('id', gigId)
+      .single();
+
+    if (error || !gig) return res.status(404).send({ error: 'Gig not found' });
+
+    // 2. Create a Stripe Checkout session
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items: [{
+        price_data: {
+          currency: 'usd',
+          product_data: { name: gig.title },
+          unit_amount: Math.round(gig.price * 100), // Price in cents
+        },
+        quantity: 1,
+      }],
+      mode: 'payment',
+      // These URLs are where Stripe will redirect the user after payment
+      success_url: `${process.env.CLIENT_URL}/success?gig_id=${gigId}`,
+      cancel_url: `${process.env.CLIENT_URL}/gig/${gigId}`,
+    });
+
+    res.json({ url: session.url });
+  } catch (err) {
+    console.error('Stripe error:', err.message);
+    res.status(500).send({ error: err.message });
+  }
+});
 // --- API Routes (No changes here) ---
 app.post('/api/create-checkout-session', async (req, res) => {
   try {

@@ -14,15 +14,12 @@ const PaymentSuccess = () => {
 
       if (gigId) {
         try {
-          // Get current user (buyer)
           const { data: { user } } = await supabase.auth.getUser();
           if (!user) throw new Error("User not found.");
 
-          // Get gig details to find seller_id and price
           const { data: gig } = await supabase.from('gigs').select('seller_id, price').eq('id', gigId).single();
           if (!gig) throw new Error("Gig not found.");
 
-          // Insert the new order
           const { error } = await supabase.from('orders').insert({
             gig_id: gigId,
             buyer_id: user.id,
@@ -42,8 +39,8 @@ const PaymentSuccess = () => {
     createOrder();
   }, [location]);
 
-  if (status === 'processing') return <p className="text-center p-8">Processing your order...</p>;
-  if (status === 'error') return <p className="text-center p-8 text-red-500">There was an error processing your order. Please contact support.</p>;
+  if (status === 'processing') return <p className="text-center p-8">Processing your order, please wait...</p>;
+  if (status === 'error') return <p className="text-center p-8 text-red-500">There was an error creating your order. Please contact support.</p>;
 
   return (
     <div className="text-center p-8">

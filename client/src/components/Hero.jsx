@@ -32,7 +32,7 @@ const Hero = ({ searchTerm, setSearchTerm, handleSearch }) => {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full p-4 border-none rounded-l-md text-gray-800 focus:outline-none"
           />
-          <button type="submit" className="bg-fiverr-green text-white px-8 font-bold rounded-r-md hover:bg-green-700">
+          <button type="submit" className="bg-skillora-green text-white px-8 font-bold rounded-r-md hover:bg-green-700">
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
               {/* FIXED: Corrected the typo in the path data (3:476 -> 3.476) */}
               <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />

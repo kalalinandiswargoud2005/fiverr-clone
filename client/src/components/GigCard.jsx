@@ -5,7 +5,7 @@ import placeholderImage from '../assets/placeholder.png';
 
 const GigCard = ({ gig, reviewCount, avgRating }) => {
   return (
-    <Link to={`/gig/${gig.id}`} className="block border rounded-lg shadow-sm hover:shadow-xl transition-shadow duration-200 overflow-hidden bg-white">
+    <Link to={`/gig/${gig.id}`} className="block border rounded-lg shadow-sm bg-white overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
       <img 
         src={gig.cover_image || placeholderImage} 
         alt={gig.title} 

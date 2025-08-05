@@ -92,7 +92,7 @@ const HomePage = () => {
       <div className="container mx-auto px-6 py-12">
         <div className="flex justify-between items-center overflow-x-auto">
           {categoriesData.map(category => (
-            <Link key={category.name} to={`/?category=${encodeURIComponent(category.name)}`} className="flex flex-col items-center space-y-2 text-gray-600 hover:text-fiverr-green p-4">
+            <Link key={category.name} to={`/?category=${encodeURIComponent(category.name)}`} className="flex flex-col items-center space-y-2 text-gray-600 hover:text-skillora-green p-4">
               <span className="text-4xl">{category.icon}</span>
               <span className="font-semibold whitespace-nowrap">{category.name}</span>
             </Link>
@@ -123,16 +123,16 @@ const HomePage = () => {
       <div className="bg-gray-900 text-white">
         <div className="container mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-4xl font-bold mb-4">fiverr. pro</h2>
+            <h2 className="text-4xl font-bold mb-4">skillora. pro</h2>
             <p className="text-xl mb-6 opacity-90">Access top-tier, vetted freelancers for your most critical projects.</p>
             <ul className="space-y-4 mb-8">
               <li className="flex items-center"><svg className="w-6 h-6 text-green-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span className="font-semibold">Vetted Professional Talent</span></li>
               <li className="flex items-center"><svg className="w-6 h-6 text-green-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span className="font-semibold">Dedicated Support</span></li>
               <li className="flex items-center"><svg className="w-6 h-6 text-green-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span className="font-semibold">Collaboration Tools</span></li>
             </ul>
-            <Link to="#" className="bg-white text-gray-900 font-bold py-3 px-6 rounded hover:bg-gray-200">Explore Fiverr Pro</Link>
+            <Link to="#" className="bg-white text-gray-900 font-bold py-3 px-6 rounded hover:bg-gray-200">Explore Skillora Pro</Link>
           </div>
-          <div><img src={proImage} alt="Fiverr Pro" className="rounded-lg shadow-2xl" /></div>
+          <div><img src={proImage} alt="SkillOra Pro" className="rounded-lg shadow-2xl" /></div>
         </div>
       </div>
       

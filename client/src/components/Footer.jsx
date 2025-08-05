@@ -9,19 +9,19 @@ const footerLinks = [
     },
     {
       title: 'For Clients',
-      links: ['How Fiverr Works', 'Customer Success Stories', 'Trust & Safety', 'Fiverr Learn - Online Courses', 'Fiverr Guides', 'Fiverr Answers'],
+      links: ['How Skillora Works', 'Customer Success Stories', 'Trust & Safety', 'Skillora Learn - Online Courses', 'Skillora Guides', 'Skillor Answers'],
     },
     {
       title: 'For Freelancers',
-      links: ['Become a Fiverr Freelancer', 'Become an Agency', 'Community Hub', 'Forum', 'Events'],
+      links: ['Become a Skillora Freelancer', 'Become an Agency', 'Community Hub', 'Forum', 'Events'],
     },
     {
       title: 'Business Solutions',
-      links: ['Fiverr Pro', 'Project Management Service', 'Expert Sourcing Service', 'ClearVoice - Content Marketing', 'Fiverr Logo Maker', 'Contact Sales'],
+      links: ['Skillora Pro', 'Project Management Service', 'Expert Sourcing Service', 'ClearVoice - Content Marketing', 'Skillora Logo Maker', 'Contact Sales'],
     },
     {
       title: 'Company',
-      links: ['About Fiverr', 'Help & Support', 'Careers', 'Terms of Service', 'Privacy Policy', 'Partnerships', 'Affiliates', 'Invite a Friend', 'Press & News', 'Investor Relations'],
+      links: ['About Skillora', 'Help & Support', 'Careers', 'Terms of Service', 'Privacy Policy', 'Partnerships', 'Affiliates', 'Invite a Friend', 'Press & News', 'Investor Relations'],
     },
 ];
 
@@ -50,8 +50,8 @@ const Footer = () => {
         {/* Bottom Section: Logo, Copyright, and Settings */}
         <div className="flex flex-col md:flex-row justify-between items-center text-sm">
           <div className="flex items-center mb-4 md:mb-0">
-            <Link to="/" className="text-2xl font-bold text-white mr-4">fiverr<span className="text-fiverr-green text-3xl">.</span></Link>
-            <span className="text-gray-400">© Fiverr International Ltd. {new Date().getFullYear()}</span>
+            <Link to="/" className="text-2xl font-bold text-white mr-4">skillora<span className="text-skillora-green text-3xl">.</span></Link>
+            <span className="text-gray-400">© Skillora International Ltd. {new Date().getFullYear()}</span>
           </div>
 
           <div className="flex items-center space-x-6">

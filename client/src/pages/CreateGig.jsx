@@ -153,7 +153,7 @@ const CreateGig = () => {
                 {/* File Upload */}
                 <div>
                   <label htmlFor="coverImage" className="block w-full text-center p-6 border-2 border-dashed rounded-lg cursor-pointer hover:bg-gray-50">
-                    <span className="text-fiverr-green font-semibold">Click to Upload Files</span>
+                    <span className="text-skillora-green font-semibold">Click to Upload Files</span>
                     <input id="coverImage" type="file" multiple onChange={handleFileSelect} accept="image/*" className="hidden"/>
                   </label>
                 </div>
@@ -166,7 +166,7 @@ const CreateGig = () => {
             )}
           </div>
 
-          <button type="submit" disabled={loading} className="w-full flex justify-center py-4 px-4 border border-transparent rounded-lg shadow-lg text-lg font-bold text-white bg-fiverr-green hover:bg-green-700 disabled:opacity-50 transition-all transform hover:scale-105">
+          <button type="submit" disabled={loading} className="w-full flex justify-center py-4 px-4 border border-transparent rounded-lg shadow-lg text-lg font-bold text-white bg-skillora-green hover:bg-green-700 disabled:opacity-50 transition-all transform hover:scale-105">
               {loading ? 'Creating Gig...' : 'Save & Publish'}
           </button>
         </form>

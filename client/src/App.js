@@ -14,7 +14,7 @@ import LeaveReviewPage from './pages/LeaveReviewPage';
 import ProfilePage from './pages/ProfilePage';
 import AdminPage from './pages/AdminPage';
 import Footer from './components/Footer';
-
+import PaymentSuccess from './pages/PaymentSuccess';
 function App() {
   return (
     <BrowserRouter>
@@ -30,7 +30,7 @@ function App() {
             <Route path="/chat/:orderId" element={<ChatPage />} />
             <Route path="/order/:orderId/review" element={<LeaveReviewPage />} />
             <Route path="/profile" element={<ProfilePage />} />
-            
+            <Route path="/success" element={<PaymentSuccess />} /> 
             {/* Dashboard and Admin routes */}
             <Route path="/dashboard" element={<DashboardGate />} />
             <Route path="/admin" element={<AdminRoute><AdminPage /></AdminRoute>} />

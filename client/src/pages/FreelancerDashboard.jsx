@@ -86,7 +86,7 @@ const FreelancerDashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
             <StatCard title="TOTAL EARNINGS" value={`$${stats.earnings.toFixed(2)}`} icon={'💰'} bgColor="bg-gradient-to-r from-green-500 to-green-400" />
             <StatCard title="ACTIVE ORDERS" value={stats.activeOrders} icon={'📦'} bgColor="bg-gradient-to-r from-blue-500 to-blue-400" />
-            <Link to="/create-gig" className="bg-white p-6 rounded-2xl shadow-lg flex items-center justify-center text-gray-700 font-bold text-lg hover:bg-gray-100 hover:text-fiverr-green transition-all">
+            <Link to="/create-gig" className="bg-white p-6 rounded-2xl shadow-lg flex items-center justify-center text-gray-700 font-bold text-lg hover:bg-gray-100 hover:text-skillora-green transition-all">
                 + Create New Gig
             </Link>
         </div>

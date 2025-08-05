@@ -72,7 +72,7 @@ const AuthModal = ({ show, onClose, initialMode = 'login', initialRole = 'client
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={onClose}>
       <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md relative" onClick={e => e.stopPropagation()}>
         <button onClick={onClose} className="absolute top-2 right-4 text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
-        <h2 className="text-2xl font-bold text-center mb-6">{mode === 'login' ? 'Sign In to Fiverr' : 'Join Fiverr'}</h2>
+        <h2 className="text-2xl font-bold text-center mb-6">{mode === 'login' ? 'Sign In to Skillora' : 'Join Skillora'}</h2>
         
         {error && <p className="bg-red-100 text-red-700 p-3 rounded-md mb-4 text-sm">{error}</p>}
 
@@ -113,13 +113,13 @@ const AuthModal = ({ show, onClose, initialMode = 'login', initialRole = 'client
               </div>
             </>
           )}
-          <button type="submit" disabled={loading} className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-fiverr-green hover:bg-green-700 disabled:opacity-50">
+          <button type="submit" disabled={loading} className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-skillora-green hover:bg-green-700 disabled:opacity-50">
             {loading ? 'Processing...' : (mode === 'login' ? 'Continue' : 'Join')}
           </button>
         </form>
         <p className="mt-6 text-center text-sm text-gray-500">
           {mode === 'login' ? "Not a member yet?" : "Already a member?"}{' '}
-          <button onClick={() => setMode(mode === 'login' ? 'register' : 'login')} className="font-medium text-fiverr-green hover:underline">
+          <button onClick={() => setMode(mode === 'login' ? 'register' : 'login')} className="font-medium text-skillora-green hover:underline">
             {mode === 'login' ? 'Join Now' : 'Sign In'}
           </button>
         </p>

@@ -104,7 +104,7 @@ const ChatPage = () => {
       <div className="flex-grow overflow-y-auto p-4 bg-gray-50 rounded-lg">
         {messages.map(msg => (
           <div key={msg.id} className={`flex my-2 ${msg.sender_id === currentUser?.id ? 'justify-end' : 'justify-start'}`}>
-            <div className={`max-w-lg p-3 rounded-lg ${msg.sender_id === currentUser?.id ? 'bg-fiverr-green text-white' : 'bg-white shadow-md'}`}>
+            <div className={`max-w-lg p-3 rounded-lg ${msg.sender_id === currentUser?.id ? 'bg-skillora-green text-white' : 'bg-white shadow-md'}`}>
               <p className="text-sm">{msg.content}</p>
               <span className="text-xs opacity-75 mt-1 block text-right">{new Date(msg.created_at).toLocaleTimeString()}</span>
             </div>
@@ -118,9 +118,9 @@ const ChatPage = () => {
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
           placeholder="Type your message..."
-          className="flex-grow p-3 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-fiverr-green"
+          className="flex-grow p-3 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-skillora-green"
         />
-        <button type="submit" className="bg-fiverr-green text-white px-6 font-bold rounded-r-lg hover:bg-green-700">Send</button>
+        <button type="submit" className="bg-skillora-green text-white px-6 font-bold rounded-r-lg hover:bg-green-700">Send</button>
       </form>
     </div>
   );

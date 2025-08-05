@@ -70,7 +70,7 @@ const ClientDashboard = () => {
                                 <Link to={`/chat/${order.id}`} className="text-sm text-blue-500 font-semibold hover:underline">View</Link>
                             </div>
                         )) : <p>No recent orders.</p>}
-                        <Link to="/orders" className="mt-4 inline-block text-fiverr-green font-bold">View all orders →</Link>
+                        <Link to="/orders" className="mt-4 inline-block text-skillora-green font-bold">View all orders →</Link>
                     </div>
                     <div className="bg-gradient-to-br from-green-400 to-blue-500 text-white p-8 rounded-2xl shadow-lg flex flex-col items-center justify-center text-center">
                         <h3 className="font-bold text-2xl mb-4">Ready to sell?</h3>

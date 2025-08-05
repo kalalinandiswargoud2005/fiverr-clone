@@ -70,7 +70,7 @@ const EditGigPage = () => {
           <label htmlFor="price" className="block text-sm font-medium text-gray-700">Price ($)</label>
           <input id="price" type="number" value={price} onChange={(e) => setPrice(e.target.value)} required min="5" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md" />
         </div>
-        <button type="submit" disabled={loading} className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-fiverr-green hover:bg-green-700 disabled:opacity-50">
+        <button type="submit" disabled={loading} className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-skillora-green hover:bg-green-700 disabled:opacity-50">
           {loading ? 'Saving...' : 'Save Changes'}
         </button>
       </form>

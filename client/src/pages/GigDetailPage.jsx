@@ -1,8 +1,8 @@
 // client/src/pages/GigDetailPage.jsx
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { supabase } from '../supabaseClient';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import placeholderImage from '../assets/placeholder.png';
+import { supabase } from '../supabaseClient';
 import axios from 'axios';
 
 const StarRating = ({ rating }) => {
@@ -67,6 +67,7 @@ const GigDetailPage = () => {
     }
   }, [gigId]);
 
+  // --- FIXED: This is the correct function for handling Stripe payments ---
   const handlePurchase = async () => {
     setPurchasing(true);
     setError('');
@@ -77,36 +78,16 @@ const GigDetailPage = () => {
         setPurchasing(false);
         return;
       }
-
-      // ⚡ Optional: Stripe Checkout Integration
+      
       const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8800';
-
-      /*
       const response = await axios.post(`${apiUrl}/api/create-checkout-session`, {
         gigId: gig.id,
-        buyerId: user.id,
       });
+
       window.location.href = response.data.url;
-      return;
-      */
-
-      // 🚀 Default: Direct order creation without payment
-      const { error: insertError } = await supabase.from('orders').insert({
-        gig_id: gig.id,
-        buyer_id: user.id,
-        seller_id: gig.seller_id,
-        price: gig.price,
-        status: 'in_progress',
-      });
-
-      if (insertError) throw insertError;
-
-      alert('Order created successfully!');
-      navigate('/orders');
     } catch (err) {
-      setError(err.message);
-      console.error("Order creation error:", err);
-    } finally {
+      console.error("Purchase error:", err);
+      setError("Failed to start purchase process. Please try again.");
       setPurchasing(false);
     }
   };
@@ -130,25 +111,26 @@ const GigDetailPage = () => {
           <h2 className="text-2xl font-bold mb-4">About This Gig</h2>
           <p className="text-gray-700 whitespace-pre-wrap mb-8">{gig.description}</p>
 
-          {/* Reviews */}
+          {/* Reviews Section */}
           <div className="border-t pt-8">
+            <h2 className="text-2xl font-bold mb-6">What people are saying</h2>
             {reviews.length > 0 ? (
-              reviews.map((review) => (
-                <div key={review.id} className="mb-6">
-                  <div className="flex items-center mb-2">
-                    <img
-                      src={review.reviewer?.profile_image_url || placeholderImage}
-                      alt={review.reviewer?.username}
-                      className="w-8 h-8 rounded-full mr-2 object-cover"
-                    />
-                    <span className="font-semibold">{review.reviewer?.username || 'User'}</span>
+              <div className="space-y-8">
+                {reviews.map(review => (
+                  <div key={review.id} className="border-b pb-6">
+                    <div className="flex items-center mb-2">
+                      <img src={review.reviewer?.profile_image_url || placeholderImage} alt={review.reviewer?.username} className="w-10 h-10 rounded-full mr-4 object-cover" />
+                      <div>
+                        <p className="font-bold">{review.reviewer?.username}</p>
+                        <StarRating rating={review.rating} />
+                      </div>
+                    </div>
+                    <p className="text-gray-600">{review.comment}</p>
                   </div>
-                  <StarRating rating={review.rating} />
-                  <p className="text-gray-600">{review.comment}</p>
-                </div>
-              ))
+                ))}
+              </div>
             ) : (
-              <p className="text-gray-500">No reviews yet.</p>
+              <p>No reviews yet.</p>
             )}
           </div>
         </div>
@@ -164,9 +146,9 @@ const GigDetailPage = () => {
             <button
               onClick={handlePurchase}
               disabled={purchasing}
-              className="w-full bg-fiverr-green text-white font-bold py-3 rounded hover:bg-green-700 transition-colors disabled:opacity-50"
+              className="w-full bg-brand-blue text-white font-bold py-3 rounded hover:bg-blue-700 transition-colors disabled:opacity-50"
             >
-              {purchasing ? 'Processing...' : `Continue ($${gig.price})`}
+              {purchasing ? 'Redirecting...' : `Continue ($${gig.price})`}
             </button>
           </div>
         </div>
